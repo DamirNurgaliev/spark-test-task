@@ -9,4 +9,12 @@ Rails.application.routes.draw do
   # the default of "spree".
   mount Spree::Core::Engine, at: '/'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  Spree::Core::Engine.add_routes do
+    namespace :admin do
+      namespace :products do
+        resource :bulk_upload, only: :create
+      end
+    end
+  end
 end
