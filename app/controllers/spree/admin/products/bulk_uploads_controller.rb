@@ -3,7 +3,17 @@ module Spree
     module Products
       class BulkUploadsController < Spree::Admin::BaseController
         def create
-          puts "123"
+          file = Products::BulkUploadAttachment.new(file: bulk_upload_params[:file])
+
+          if file.save
+            Products::BulkUpload.perform_later(file.id)
+
+            flash[:success] = "Success"
+          else
+            flash[:error] = "Error"
+          end
+
+          redirect_to admin_products_path
         end
 
         private

@@ -1,6 +1,6 @@
 <h3>Import Products from CSV file</h3>
 
-<%= form_tag admin_products_bulk_upload_path, method: :post do %>
+<%= form_tag admin_products_bulk_upload_path, method: :post, multipart: true do %>
    <%= file_field_tag :file, accept: "text/csv" %>
    <%= button "Import from CSV", "submit", { class: "btn-success" } %>
 <% end %>
